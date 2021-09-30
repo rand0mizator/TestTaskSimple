@@ -1,0 +1,38 @@
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Выберите изображение:</p>
+    <p><input type="file" name="image" ></p>
+    <p>Введите цвет в формате HEX-кода без символа #:</p>
+    <p><input type="text" name="color" ></p>
+    <p><input type="submit" name="submit" value="Пуск" ></p>
+</form>
+{% if image_url %}
+<img src="{{ image_url }}" alt="xxx" width="500" height="500"><br>
+{% endif %}
+{% if white > black %}
+<p>На изображении больше белых пикселей</p>
+{% else %}
+<p>На изображении больше черных пикселей</p>
+{% endif %}
+{% if white > 0 %}
+<p>Количество пикселей белого (255, 255, 255) цвета: {{ white }}</p>
+{% else %}
+<p>Белых (255, 255, 255) пикселей не найдено</p>
+{% endif %}
+{% if black > 0 %}
+<p>Количество пикселей черного (0, 0, 0) цвета: {{ black }}</p>
+{% else %}
+<p>Черных (0, 0, 0) пикселей не найдено</p>
+{% endif %}
+{% if color != None %}
+    {% if color_px > 0 %}
+    <p>Количество пикселей {{ color }} цвета: {{ color_px }}</p>
+    {% else %}
+    <p>Пикселей цвета {{ color }} не найдено</p>
+    {% endif %}
+{% else %}
+    <p>Цвет не указан или указан неверно</p>
+{% endif %}
+
+
+
